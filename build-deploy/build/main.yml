@@ -1,0 +1,5 @@
+- hosts: local
+  vars_files:
+  - /vagrant/getip-app/app/app-vars.yml
+  roles:
+  - building-app

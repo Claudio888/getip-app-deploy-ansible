@@ -1,0 +1,24 @@
+- name: Build projeto
+  shell: docker build -t getipv2 .
+  become: yes
+  args:
+    chdir: /vagrant/getip-app/app
+
+- name: Etiqueta a imagem 
+  shell: docker tag getipv2 933375035704.dkr.ecr.us-east-1.amazonaws.com/getip-images:{{ version }}
+  become: yes
+
+- name: Login ECR
+  shell: aws ecr get-login-password | docker login --username AWS --password-stdin 933375035704.dkr.ecr.us-east-1.amazonaws.com/getip-images
+  become: yes  
+
+- name: Envia imagem para ECR 
+  shell: docker push 933375035704.dkr.ecr.us-east-1.amazonaws.com/getip-images:{{ version }}
+  become: yes
+
+#- name: GET Hosts
+#  amazon.aws.aws_s3:
+#    bucket: getip-hosts-{{ env }}
+#    object: hosts
+#    dest: ./hosts
+#    mode: get
