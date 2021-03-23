@@ -1,0 +1,6 @@
+- name: Download arquivo hosts do S3
+  aws_s3:
+    bucket: getip-hosts-{{ env }}
+    object: hosts
+    dest: /vagrant/getip-app/build-deploy/deploy/hosts
+    mode: get

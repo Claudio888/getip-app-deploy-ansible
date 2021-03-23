@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.9.0-alpine
 
 RUN pip install fastapi uvicorn jinja2 aiofiles
 

@@ -1,15 +1,12 @@
-- hosts: Instance
-  tasks:
+- name: Login ECR
+  shell: aws ecr get-login-password | docker login --username AWS --password-stdin 933375035704.dkr.ecr.us-east-1.amazonaws.com/getip-images
+  become: yes 
 
-  - name: Login ECR
-    shell: aws ecr get-login-password | docker login --username AWS --password-stdin 933375035704.dkr.ecr.us-east-1.amazonaws.com/getip-images
-    become: yes 
-
-  - name: Deleta container atual
-    shell:  docker rm -f getipv2
-    become: yes
-    ignore_errors: yes
+- name: Deleta container atual
+  shell:  docker rm -f getipv2
+  become: yes
+  ignore_errors: yes
  
-  - name: Sobe novo container
-    shell: docker run -d --name getipv2 -p 8090:8090 933375035704.dkr.ecr.us-east-1.amazonaws.com/getip-images
-    become: yes
+- name: Sobe novo container
+  shell: docker run -d --name getipv2 -p 8090:8090 933375035704.dkr.ecr.us-east-1.amazonaws.com/getip-images:{{ version }}
+  become: yes

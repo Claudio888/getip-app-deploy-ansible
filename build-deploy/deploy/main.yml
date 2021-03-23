@@ -1,0 +1,16 @@
+- hosts: local
+  vars_files:
+  - /vagrant/getip-app/app/app-vars.yml
+  
+- hosts: local
+  become: yes
+  roles:
+  - { role: get-hosts, tags: ["get-hosts-role"] }
+
+- hosts: Instance
+  vars_files:
+  - /vagrant/getip-app/app/app-vars.yml
+  become: yes
+  user: ubuntu
+  roles:
+  - { role: deploying-app, tags: ["deploying-app-role"] }
