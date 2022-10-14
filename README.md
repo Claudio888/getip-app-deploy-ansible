@@ -2,6 +2,8 @@
 
 Aplicação simples que exibe seu IP de acesso, feita visando apenas ser um detalhe para a implementação de IaC e conceitos de deployment blue/green
 
+Feita para estudos, para fazer deploy com a instancia criada previamente pelo projeto https://github.com/Claudio888/getip-infra-deploy-gaction
+
 ## Como usar
 
 ### Build
